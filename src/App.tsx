@@ -1,7 +1,16 @@
 import Card from "./components/Card";
+import useFetch from "./hooks/useFetch";
+
+export type Cards = {
+  id: string;
+  url: string;
+  name: string;
+};
 
 function App() {
-  const cardsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const { data: fetchedData } = useFetch();
+  console.log(fetchedData);
+
   return (
     <>
       <h1>Memory Game</h1>
@@ -9,8 +18,8 @@ function App() {
         <h2>High Score: </h2>
         <h2>Current Score: </h2>
         <div className="cardsContainer">
-          {cardsArr.map((index) => {
-            return <Card key={index} />;
+          {fetchedData.map((card) => {
+            return <Card key={card.id} card={card} />;
           })}
         </div>
       </div>
